@@ -66,5 +66,5 @@ def predict_price(model, area, bedrooms, bathrooms, stories, parking,
     return predicted_price[0]
 
 # Load the data and train the model when the script runs
-data = load_data('data/housing_data.csv')  # Adjust the path as necessary
+data = load_data('data/housing_data.csv')
 model = train_model(data)
