@@ -48,7 +48,7 @@ Fill out the form with the required details about the house and click the "Predi
 Below are screenshots illustrating the form submission and the predicted results.
 
 ### Form Submission
-![Form Submission](screenshots/form submission.png)
+![Form Submission](screenshots/form_submission.png)
 
 ### Prediction Result
 ![Prediction Result](screenshots/predicted.png)
