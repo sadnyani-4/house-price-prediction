@@ -47,9 +47,11 @@ Fill out the form with the required details about the house and click the "Predi
 ## Screenshots
 Below are screenshots illustrating the form submission and the predicted results.
 
-Form Submission
+### Form Submission
+![Form Submission](screenshots/form submission.png)
 
-Prediction Result
+### Prediction Result
+![Prediction Result](screenshots/predicted.png)
 
 ## Code Overview
 - index.html: Contains the HTML structure and frontend logic for the prediction form and custom popup display.
