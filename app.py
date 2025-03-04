@@ -51,4 +51,7 @@ def index():
     return render_template('index.html', predicted_price=None)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # development mode
+    # app.run(debug=True)
+
+    app.run(debug=True) # production mode
