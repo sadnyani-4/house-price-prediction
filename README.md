@@ -1,7 +1,7 @@
 # House Price Prediction Application
 
 ## Description
-The House Price Prediction Application is a web-based tool aimed at estimating real estate values based on user-specified parameters, including area, number of bedrooms, bathrooms, stories, and other features. The application utilizes a Linear Regression model to provide users with accurate predictions of market prices. The front end is developed using standard HTML, CSS, and JavaScript, ensuring a straightforward implementation that can easily be adapted to React.js or similar frameworks for a more dynamic experience.
+The House Price Prediction Application is a web-based tool to estimate real estate values based on user-specified parameters, including area, number of bedrooms, bathrooms, stories, and other features. The application utilizes a Linear Regression model to give users accurate market price predictions. The front end is developed using standard HTML, CSS, and JavaScript, ensuring a straightforward implementation that can easily be adapted to React.js or similar frameworks for a more dynamic experience.
 
 The user-friendly interface allows users to input various property characteristics, and upon submission, a predicted price is calculated and displayed in a neatly formatted popup. The application efficiently pre-processes categorical features using techniques like One-Hot Encoding and normalizes numerical features with standard scaling to enhance model performance.
 
@@ -64,4 +64,4 @@ This application can easily be adapted to use React.js for a more dynamic front-
 ## Acknowledgements
 This application was developed using Flask and Scikit-learn.
 
-Sadnyani Gomkar - [Your GitHub Profile](https://github.com/sadnyani-4)
+Sadnyani Gomkar - [My GitHub Profile](https://github.com/sadnyani-4)
