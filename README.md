@@ -4,6 +4,7 @@ This is a project focused on predicting house prices based on various features u
 
 ## Table of Contents
 
+- Demo
 - Introduction
 - Technologies Used
 - Dataset
@@ -12,6 +13,12 @@ This is a project focused on predicting house prices based on various features u
 - Model Development
 - Results
 - Contributing
+
+## Demo
+
+You can see a live demo of the application at the following link:
+
+[Visit my House Price Predictor](https://house-price-predictor-xn3f.onrender.com)
 
 ## Introduction
 
