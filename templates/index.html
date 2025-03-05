@@ -3,215 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>House Price Prediction</title>
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@300&display=swap">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script&display=swap">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>House Price Prediction</title>
     <style>
         body {
-            background-color: #fef3f2; /* Soft pink background */
-            font-family: 'Raleway', sans-serif;
-            margin-top: 30px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f3f5; /* Light pastel background */
+            color: #333;
         }
-        .container {
-            background-color: #ffffff; /* White background for form */
-            border-radius: 15px; /* Rounded corners */
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff; /* White background for form */
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f8b4d0; /* Light pink border */
         }
-        h1 {
-            font-family: 'Pacifico', cursive; /* Decorative font for the title */
-            color: #ff6f61; /* Coral color */
+        h2 {
             text-align: center;
             margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px; /* Larger font for title */
+            color: #ff77a1; /* Soft pink color for title */
         }
-        label {
-            color: #ff6f61; /* Coral color for labels */
+        .prediction {
+            background-color: #ffecf2; /* Light pink background */
+            border: 2px dashed #ff77a1; /* Dashed border */
+            border-radius: 10px; /* Rounded corners */
+            padding: 15px; /* Padding for nice spacing */
+            margin: 30px 0; /* Add margin above and below */
+            text-align: center; /* Centered text */
+            font-size: 28px; /* Larger font for prediction */
+            color: #d5006d; /* Darker pink color for prediction text */
+        }
+        .form-group label {
             font-weight: bold;
         }
-        .form-group {
-            margin-bottom: 15px;
+        .btn-primary {
+            background-color: #ff77a1; /* Button pink */
+            border: none; /* No border */
+            border-radius: 20px; /* Rounded button edges */
+            padding: 10px;
+            transition: background-color 0.3s ease;
         }
-        .btn {
-            background-color: #ff6f61; /* Coral color for button */
-            color: #ffffff;
+        .btn-primary:hover {
+            background-color: #ff5a88; /* Darker pink on hover */
         }
-        .btn:hover {
-            background-color: #e03e32; /* Darker coral for hover */
+        .form-control {
+            border-radius: 10px; /* Rounded input edges */
+            border: 1px solid #ff77a1; /* Pink border for inputs */
         }
-
-        /* Custom Popup Styles */
-        .custom-popup {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
-            justify-content: center;
-            align-items: center;
+        .form-control:focus {
+            border-color: #ff5a88; /* Darker pink on focus */
+            box-shadow: 0 0 5px rgba(255, 90, 136, 0.5);
         }
-        
-        .popup-content {
-            background-color: #ffffff; /* White background for popup */
-            border-radius: 10px; /* Rounded corners */
-            padding: 20px;
-            text-align: center; /* Center the text */
-            width: 80%; /* Adjust width */
-            max-width: 400px; /* Limit maximum width */
-        }
-
-        .close-popup {
-            background-color: #ff6f61; /* Coral background for close button */
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px; /* Rounded corners for button */
-            cursor: pointer;
+        .footer {
+            text-align: center;
             margin-top: 20px;
-        }
-
-        .close-popup:hover {
-            background-color: #e03e32; /* Darker coral for hover */
+            font-size: 14px;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Predict House Price</h1>
-        <form method="POST" id="predictionForm">
+    <div class="form-container">
+        <h2>🏡 House Price Predictor 🏡</h2>
+        <form method="POST" action="/predict">
             <div class="form-group">
-                <label for="area">Area:</label>
-                <input type="number" class="form-control" name="area" id="area" required>
+                <label for="area">Area (sq ft):</label>
+                <input type="number" class="form-control" id="area" name="area" required>
             </div>
             <div class="form-group">
                 <label for="bedrooms">Bedrooms:</label>
-                <input type="number" class="form-control" name="bedrooms" id="bedrooms" required>
+                <input type="number" class="form-control" id="bedrooms" name="bedrooms" required>
             </div>
             <div class="form-group">
                 <label for="bathrooms">Bathrooms:</label>
-                <input type="number" class="form-control" name="bathrooms" id="bathrooms" required>
+                <input type="number" class="form-control" id="bathrooms" name="bathrooms" required>
             </div>
             <div class="form-group">
                 <label for="stories">Stories:</label>
-                <input type="number" class="form-control" name="stories" id="stories" required>
+                <input type="number" class="form-control" id="stories" name="stories" required>
             </div>
             <div class="form-group">
                 <label for="parking">Parking:</label>
-                <input type="number" class="form-control" name="parking" id="parking" required>
+                <input type="number" class="form-control" id="parking" name="parking" required>
             </div>
             <div class="form-group">
-                <label>Main Road:</label>
-                <select name="mainroad" class="form-control" required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                <label for="mainroad">Main Road:</label>
+                <select class="form-control" id="mainroad" name="mainroad" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Guest Room:</label>
-                <select name="guestroom" class="form-control" required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                <label for="guestroom">Guest Room:</label>
+                <select class="form-control" id="guestroom" name="guestroom" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Basement:</label>
-                <select name="basement" class="form-control" required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                <label for="basement">Basement:</label>
+                <select class="form-control" id="basement" name="basement" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Hot Water Heating:</label>
-                <select name="hotwaterheating" class="form-control" required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                <label for="hotwaterheating">Hot Water Heating:</label>
+                <select class="form-control" id="hotwaterheating" name="hotwaterheating" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Air Conditioning:</label>
-                <select name="airconditioning" class="form-control" required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                <label for="airconditioning">Air Conditioning:</label>
+                <select class="form-control" id="airconditioning" name="airconditioning" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Pref Area:</label>
-                <select name="prefarea" class="form-control" required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                <label for="prefarea">Preferred Area:</label>
+                <select class="form-control" id="prefarea" name="prefarea" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Furnishing Status:</label>
-                <select name="furnishingstatus" class="form-control" required>
-                    <option value="" disabled selected>Select</option>
+                <label for="furnishingstatus">Furnishing Status:</label><br>
+                <select class="form-control" id="furnishingstatus" name="furnishingstatus" required>
                     <option value="furnished">Furnished</option>
                     <option value="semi-furnished">Semi-Furnished</option>
                     <option value="unfurnished">Unfurnished</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Predict</button>
+            <button type="submit" class="btn btn-primary btn-block">Predict Price</button>
         </form>
 
-        <!-- Custom Popup -->
-        <div id="customPopup" class="custom-popup">
-            <div class="popup-content">
-                <h2 id="popupTitle">Result</h2>
-                <p id="popupMessage"></p>
-                <button class="close-popup" onclick="closePopup()">Close</button>
-            </div>
+        {% if prediction %}
+            <h2 class="prediction">Predicted Price: ${{ prediction | round(2) }}</h2>
+        {% endif %}
+
+        <div class="footer">
+            <p>💖 Made with love & care 💖</p>
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        document.getElementById("predictionForm").onsubmit = function(event) {
-            // Prevent default form submission
-            event.preventDefault();
-    
-            // Assuming the prediction is successful and you have a predicted_price variable.
-            var predictedPrice = '{{ predicted_price }}'; // This value should come from your backend
-    
-            // Format the predicted price using Intl.NumberFormat
-            var formattedPrice = new Intl.NumberFormat('en-US', { 
-                style: 'currency', 
-                currency: 'USD', 
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2 
-            }).format(predictedPrice);
-    
-            // Update the popup message
-            document.getElementById("popupMessage").innerText = "Predicted Price: " + formattedPrice;
-    
-            // Display the custom popup
-            document.getElementById("customPopup").style.display = "flex";
-        };
-    
-        function closePopup() {
-            document.getElementById("customPopup").style.display = "none";
-        }
-    
-        // Close the popup when clicking outside of it
-        window.onclick = function(event) {
-            var popup = document.getElementById("customPopup");
-            if (event.target === popup) {
-                popup.style.display = "none";
-            }
-        };
-    </script>
 </body>
 </html>

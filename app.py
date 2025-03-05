@@ -1,57 +1,55 @@
-from flask import Flask, request, render_template
-from model import predict_price, model
+from flask import Flask, render_template, request
+import joblib
+import numpy as np
+import pandas as pd
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+# Load the pre-trained model
+model = joblib.load('house_price_model.pkl')
+
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        # Gather fields from the form
-        area = request.form.get('area')
-        bedrooms = request.form.get('bedrooms')
-        bathrooms = request.form.get('bathrooms')
-        stories = request.form.get('stories')
-        parking = request.form.get('parking')
-        mainroad = request.form.get('mainroad')
-        guestroom = request.form.get('guestroom')
-        basement = request.form.get('basement')
-        hotwaterheating = request.form.get('hotwaterheating')
-        airconditioning = request.form.get('airconditioning')
-        prefarea = request.form.get('prefarea')
-        furnishingstatus = request.form.get('furnishingstatus')
+    return render_template('index.html')
 
-        # Validate that all inputs are filled and valid
-        if (area and bedrooms and bathrooms and stories and parking and 
-            mainroad and guestroom and basement and hotwaterheating and 
-            airconditioning and prefarea and furnishingstatus):
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Get form data
+    area = float(request.form['area'])
+    bedrooms = float(request.form['bedrooms'])
+    bathrooms = float(request.form['bathrooms'])
+    stories = float(request.form['stories'])
+    parking = float(request.form['parking'])
+    mainroad = request.form['mainroad']
+    guestroom = request.form['guestroom']
+    basement = request.form['basement']
+    hotwaterheating = request.form['hotwaterheating']
+    airconditioning = request.form['airconditioning']
+    prefarea = request.form['prefarea']
+    furnishingstatus = request.form['furnishingstatus']
 
-            try:
-                # Convert completed fields to the appropriate types
-                area = float(area)
-                bedrooms = int(bedrooms)
-                bathrooms = int(bathrooms)
-                stories = int(stories)
-                parking = int(parking)
+    # Prepare feature vector, format it as DataFrame
+    input_data = pd.DataFrame(
+        {
+            'area': [area],
+            'bedrooms': [bedrooms],
+            'bathrooms': [bathrooms],
+            'stories': [stories],
+            'parking': [parking],
+            'mainroad': [mainroad],
+            'guestroom': [guestroom],
+            'basement': [basement],
+            'hotwaterheating': [hotwaterheating],
+            'airconditioning': [airconditioning],
+            'prefarea': [prefarea],
+            'furnishingstatus': [furnishingstatus],
+        }
+    )
 
-                # Call the prediction function using the trained model
-                predicted_price_value = predict_price(model, area, bedrooms, bathrooms, stories,
-                                                      parking, mainroad, guestroom, basement,
-                                                      hotwaterheating, airconditioning, prefarea,
-                                                      furnishingstatus)
+    # Make prediction
+    predicted_price = model.predict(input_data)[0]
 
-                return render_template('index.html', predicted_price=predicted_price_value)
-
-            except ValueError:
-                # If conversion fails, return to the original form with empty prediction
-                return render_template('index.html', predicted_price=None)
-
-        # If any field is empty, set predicted_price to None
-        return render_template('index.html', predicted_price=None)
-
-    return render_template('index.html', predicted_price=None)
+    return render_template('index.html', prediction=predicted_price)
 
 if __name__ == '__main__':
-    # development mode
-    # app.run(debug=True)
-
-    app.run(debug=True) # production mode
+    app.run(debug=True)

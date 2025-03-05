@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+</head>
+<body>
+    <h1>Predict House Price</h1>
+    <form action="/predict" method="post">
+        <label for="area">Area (sqft):</label><br>
+        <input type="text" id="area" name="area" required><br>
+
+        <label for="bedrooms">Bedrooms:</label><br>
+        <input type="text" id="bedrooms" name="bedrooms" required><br>
+
+        <label for="bathrooms">Bathrooms:</label><br>
+        <input type="text" id="bathrooms" name="bathrooms" required><br>
+
+        <label for="stories">Stories:</label><br>
+        <input type="text" id="stories" name="stories" required><br>
+
+        <label for="parking">Parking:</label><br>
+        <input type="text" id="parking" name="parking" required><br>
+
+        <label for="mainroad">Main Road:</label><br>
+        <select id="mainroad" name="mainroad" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+
+        <label for="guestroom">Guest Room:</label><br>
+        <select id="guestroom" name="guestroom" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+
+        <label for="basement">Basement:</label><br>
+        <select id="basement" name="basement" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+
+        <label for="hotwaterheating">Hot Water Heating:</label><br>
+        <select id="hotwaterheating" name="hotwaterheating" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+
+        <label for="airconditioning">Air Conditioning:</label><br>
+        <select id="airconditioning" name="airconditioning" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+
+        <label for="prefarea">Preferred Area:</label><br>
+        <select id="prefarea" name="prefarea" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+
+        <label for="furnishingstatus">Furnishing Status:</label><br>
+        <select id="furnishingstatus" name="furnishingstatus" required>
+            <option value="furnished">Furnished</option>
+            <option value="semi-furnished">Semi-Furnished</option>
+            <option value="unfurnished">Unfurnished</option>
+        </select><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if prediction %}
+        <h2>Predicted Price: ${{ prediction | round(2) }}</h2>
+    {% endif %}
+</body>
+</html>
