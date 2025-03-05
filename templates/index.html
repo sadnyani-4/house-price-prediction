@@ -146,7 +146,8 @@
         </form>
 
         {% if prediction %}
-            <h2 class="prediction">Predicted Price: ${{ prediction | round(2) }}</h2>
+            <!-- <h2 class="prediction">Predicted Price: ${{ prediction | round(2) }}</h2> -->
+            <h2 class="prediction">Predicted Price: {{ "$" ~ '{:,.2f}'.format(prediction) }}</h2>
         {% endif %}
 
         <div class="footer">
