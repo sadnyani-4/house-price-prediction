@@ -95,6 +95,14 @@ The project includes the following steps for the model development process:
 ## Results
 The project's results will include model performance metrics and visualizations. Detailed outcomes can be found in the Jupyter Notebooks or reports provided in the repository.
 
+## Screenshots
+
+### Form Submission
+![Form Submission](screenshots/submission.png)
+
+### Prediction Result
+![Prediction Result](screenshots/result.png)
+
 ## Contributing
 Contributions are welcome! Feel free to submit a pull request for any improvements, bug fixes, or feature additions. Please ensure that your code adheres to the project's style conventions.
 
