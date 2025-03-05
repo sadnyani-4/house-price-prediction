@@ -101,7 +101,7 @@ The project's results will include model performance metrics and visualizations.
 ![Form Submission](screenshots/submission.png)
 
 ### Prediction Result
-![Prediction Result](screenshots/result.png)
+![Prediction Result](screenshots/predicted.png)
 
 ## Contributing
 Contributions are welcome! Feel free to submit a pull request for any improvements, bug fixes, or feature additions. Please ensure that your code adheres to the project's style conventions.
