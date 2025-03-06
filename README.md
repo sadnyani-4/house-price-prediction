@@ -59,9 +59,8 @@ This project utilizes a dataset that includes various features describing houses
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/username/repository-name.git
+   git clone https://github.com/sadnyani-4/house-price-prediction.git
    ```
-   Replace username and repository-name with your actual GitHub username and repository name.
 
 2. Navigate into the project directory:
 
